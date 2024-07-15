@@ -14,6 +14,14 @@ function nextSequence() {
    return gamePattern;
 };
 
+function animatePress(currentColour) {
+   let selector = "#" + currentColour;
+   $(selector).addClass("pressed");
+   setTimeout(()=> {
+      $(selector).removeClass("pressed");
+   }, 100);
+};
+
 function playSound(name) {
    var audio = new Audio('sounds/' + name + '.mp3');
    audio.play();
@@ -36,6 +44,6 @@ $(".btn").click(function() {
  
    userClickedPattern.push(userChosenColour);
    // console.log(userClickedPattern);
-
+   animatePress(userChosenColour);
    playSound(userChosenColour);
  });
