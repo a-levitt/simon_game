@@ -1,5 +1,7 @@
 let buttonColours = ["red", "blue", "green", "yellow"];
 
+let userClickedPattern = [];
+
 function nextSequence() {
    let randomNumber = Math.round(Math.random()*3);   
    let randomChosenColour =  buttonColours[randomNumber];
@@ -15,7 +17,7 @@ function newArr() {
 
 function showNext() {
    let nextRand = nextSequence();
-   
+
    let nextButton = "#" + nextRand;
    $(nextButton).animate({opacity:0.2}).animate({opacity: 1});
 
@@ -23,3 +25,14 @@ function showNext() {
    audio.play();
 };
 
+
+$(".btn").click(function() {
+
+   let userChosenColour = $(this).attr("id");
+   // console.log(userChosenColour);
+ 
+   userClickedPattern.push(userChosenColour);
+ 
+   // console.log(userClickedPattern);
+ 
+ });
