@@ -12,3 +12,9 @@ function newArr() {
    gamePattern.push(nextSequence());
    return gamePattern;
 };
+
+function showNext() {
+   let nextButton = "#" + nextSequence();
+   $(nextButton).animate({opacity:0.2}).animate({opacity: 1});
+};
+
