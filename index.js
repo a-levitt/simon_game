@@ -14,7 +14,12 @@ function newArr() {
 };
 
 function showNext() {
-   let nextButton = "#" + nextSequence();
+   let nextRand = nextSequence();
+   
+   let nextButton = "#" + nextRand;
    $(nextButton).animate({opacity:0.2}).animate({opacity: 1});
+
+   var audio = new Audio('sounds/' + nextRand + '.mp3');
+   audio.play();
 };
 
