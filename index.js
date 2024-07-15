@@ -3,39 +3,16 @@ let buttonColours = ["red", "blue", "green", "yellow"];
 let gamePattern = [];
 let userClickedPattern = [];
 
-function chooseColor() {
-   let randomNumber = Math.round(Math.random()*3);   
-   let randomChosenColour =  buttonColours[randomNumber];
-   return randomChosenColour;
-};
+let started = false;
+let level = 0;
 
-function nextSequence() {
-   gamePattern.push(chooseColor());
-   return gamePattern;
-};
-
-function animatePress(currentColour) {
-   let selector = "#" + currentColour;
-   $(selector).addClass("pressed");
-   setTimeout(()=> {
-      $(selector).removeClass("pressed");
-   }, 100);
-};
-
-function playSound(name) {
-   var audio = new Audio('sounds/' + name + '.mp3');
-   audio.play();
- };
-
-function showNext() {
-   let nextRand = chooseColor();
-
-   let nextButton = "#" + nextRand;
-   $(nextButton).animate({opacity:0.2}).animate({opacity: 1});
-
-   playSound(nextRand);
-};
-
+$(document).keypress(function() {
+   if (!started) {
+      $("#level-title").text("Level " + level);
+      nextSequence();
+      started = true;
+   }
+});
 
 $(".btn").click(function() {
 
@@ -47,3 +24,27 @@ $(".btn").click(function() {
    animatePress(userChosenColour);
    playSound(userChosenColour);
  });
+
+function nextSequence() {
+   level++;
+   $("#level-title").text("Level " + level);
+
+   let randomNumber = Math.round(Math.random()*3);   
+   let randomChosenColour =  buttonColours[randomNumber];
+   gamePattern.push(randomChosenColour);
+
+   $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+   playSound(randomChosenColour);
+};
+
+function animatePress(currentColour) {
+   $("#" + currentColour).addClass("pressed");
+   setTimeout(()=> {
+      $("#" + currentColour).removeClass("pressed");
+   }, 100);
+};
+
+function playSound(name) {
+   var audio = new Audio('sounds/' + name + '.mp3');
+   audio.play();
+};
